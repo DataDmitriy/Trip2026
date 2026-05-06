@@ -28,7 +28,8 @@ interface Props {
 
 export default function DaysScreen({ onPlace }: Props) {
   const days = allDays();
-  const [active, setActive] = useState(6);
+  // День 1 = 6 мая (прилёт), День 2 = 7 мая (джетлаг + центр) — сегодня
+  const [active, setActive] = useState(1);
   const day = days[active];
 
   return (

@@ -15,8 +15,8 @@ interface Props {
 export default function HomeMapScreen({ onCity, dark }: Props) {
   const [activeCity, setActiveCity] = useState<City | null>(null);
   const cities = TRIP.cities;
-  // For demo: today is 12 May 2026 → Disneyland day
-  const today = cities[1];
+  // Сегодня 7 мая — первый день путешествия по Будапешту
+  const today = cities[0];
 
   return (
     <div style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden", position: "relative" }}>
