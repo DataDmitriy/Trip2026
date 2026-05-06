@@ -1,0 +1,80 @@
+/* Design tokens from the handoff. Light + dark themes. */
+:root {
+  --bg: #FFF8F1;
+  --surface: #FFFFFF;
+  --text: #1F1714;
+  --text-secondary: #6B5F58;
+  --border: #ECE2D4;
+  --border-strong: #D9CABB;
+  --coral-text: #C84F38;
+  --coral-btn: #F06B50;
+  --coral-soft: #FFE9DF;
+  --chip-bg: #F4EBDF;
+}
+
+[data-theme="dark"] {
+  --bg: #14110F;
+  --surface: #1F1B18;
+  --text: #F2EBE3;
+  --text-secondary: #A39588;
+  --border: #2F2925;
+  --border-strong: #4A413A;
+  --coral-text: #FF8266;
+  --coral-btn: #F06B50;
+  --coral-soft: #3A2419;
+  --chip-bg: #2A2420;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Google Sans Text", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  overscroll-behavior: none;
+}
+
+body {
+  min-height: 100dvh;
+}
+
+button {
+  font-family: inherit;
+}
+
+input, textarea {
+  font-family: inherit;
+}
+
+.nsb::-webkit-scrollbar { display: none; }
+.nsb { scrollbar-width: none; }
+
+@keyframes thinking-bounce {
+  0%, 80%, 100% { opacity: 0.3; transform: translateY(0); }
+  40% { opacity: 1; transform: translateY(-3px); }
+}
+
+/* mapbox tweaks */
+.mapboxgl-ctrl-bottom-right, .mapboxgl-ctrl-bottom-left { display: none !important; }
+.mapboxgl-popup-content {
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  font-family: "Google Sans Text", sans-serif;
+  font-size: 13px;
+  padding: 8px 12px;
+}
+.mapboxgl-popup-tip { display: none; }
+
+/* mono numerics */
+.mono {
+  font-family: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}

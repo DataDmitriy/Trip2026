@@ -1,0 +1,12 @@
+node_modules/
+.next/
+out/
+.env
+.env.local
+.env.production.local
+.DS_Store
+*.log
+.vercel
+trip_zip/
+Trip 2026.zip
+tsconfig.tsbuildinfo
