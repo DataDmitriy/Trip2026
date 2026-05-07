@@ -3,6 +3,28 @@
 import { useState } from "react";
 import { Plane, Car, Train, Footprints, Bed, Moon, Search } from "lucide-react";
 import { allDays, type CityId, type DayItem, type DayItemKind } from "@/lib/trip";
+
+function todayIndex(days: ReturnType<typeof allDays>): number {
+  const months: Record<string, number> = {
+    января: 0, февраля: 1, марта: 2, апреля: 3, мая: 4, июня: 5,
+    июля: 6, августа: 7, сентября: 8, октября: 9, ноября: 10, декабря: 11,
+  };
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+  let bestIdx = 0;
+  let bestDelta = Infinity;
+  days.forEach((d, i) => {
+    const m = d.date.match(/(\d+)\s+([а-я]+)/);
+    if (!m) return;
+    const dayDate = new Date(2026, months[m[2]] ?? 0, Number(m[1])).getTime();
+    const delta = Math.abs(dayDate - today);
+    if (delta < bestDelta) {
+      bestDelta = delta;
+      bestIdx = i;
+    }
+  });
+  return bestIdx;
+}
 import { ScreenHeader, iconBtn } from "../ui";
 
 interface KindMeta {
@@ -28,8 +50,7 @@ interface Props {
 
 export default function DaysScreen({ onPlace }: Props) {
   const days = allDays();
-  // День 1 = 6 мая (прилёт), День 2 = 7 мая (джетлаг + центр) — сегодня
-  const [active, setActive] = useState(1);
+  const [active, setActive] = useState(() => todayIndex(days));
   const day = days[active];
 
   return (

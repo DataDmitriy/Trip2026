@@ -349,6 +349,32 @@ export function placeById(cityId: CityId, placeId: string): Place | undefined {
   return TRIP[cityId].places.find(p => p.id === placeId);
 }
 
+// Возвращает город, в котором семья находится сегодня (по диапазону `dates` вида "6–11 мая").
+// Если ни один диапазон не покрывает текущую дату, возвращает ближайший будущий город,
+// иначе — последний (после возвращения).
+export function currentCity(now: Date = new Date()): City {
+  const months: Record<string, number> = {
+    января: 0, февраля: 1, марта: 2, апреля: 3, мая: 4, июня: 5,
+    июля: 6, августа: 7, сентября: 8, октября: 9, ноября: 10, декабря: 11,
+  };
+  const year = 2026;
+  const ranges = TRIP.cities.map(c => {
+    const m = c.dates.match(/(\d+)[–-](\d+)\s+([а-я]+)/);
+    if (!m) return { city: c, start: new Date(0), end: new Date(0) };
+    const [, a, b, mon] = m;
+    const month = months[mon] ?? 0;
+    return {
+      city: c,
+      start: new Date(year, month, Number(a)),
+      end: new Date(year, month, Number(b), 23, 59, 59),
+    };
+  });
+  const inRange = ranges.find(r => now >= r.start && now <= r.end);
+  if (inRange) return inRange.city;
+  const future = ranges.find(r => now < r.start);
+  return (future ?? ranges[ranges.length - 1]).city;
+}
+
 export function allDays(): Array<Day & { cityId: CityId; cityName: string; cityColor: string }> {
   const out: Array<Day & { cityId: CityId; cityName: string; cityColor: string }> = [];
   TRIP.cities.forEach(c => {

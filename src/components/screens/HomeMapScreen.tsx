@@ -3,7 +3,7 @@
 import { useState } from "react";
 import dynamic from "next/dynamic";
 import { Search, Filter, Navigation } from "lucide-react";
-import { TRIP, type City } from "@/lib/trip";
+import { TRIP, currentCity, type City } from "@/lib/trip";
 
 const EuropeMap = dynamic(() => import("../EuropeMap"), { ssr: false });
 
@@ -15,8 +15,7 @@ interface Props {
 export default function HomeMapScreen({ onCity, dark }: Props) {
   const [activeCity, setActiveCity] = useState<City | null>(null);
   const cities = TRIP.cities;
-  // Сегодня 7 мая — первый день путешествия по Будапешту
-  const today = cities[0];
+  const today = currentCity();
 
   return (
     <div style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden", position: "relative" }}>
