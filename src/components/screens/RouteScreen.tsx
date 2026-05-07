@@ -104,10 +104,10 @@ export default function RouteScreen({ place, city, onBack }: { place: Place; cit
         <div style={{ marginTop: 18 }}>
           <SectionLabel>Семейные нюансы</SectionLabel>
           <Card>
-            <Adv text="Лёва (2г) проходит без жалоб ≤ 800 м. Маршрут уложился в лимит." good />
+            <Adv text="Стелла (2г) проходит без жалоб ≤ 800 м. Маршрут уложился в лимит." good />
             <Adv text="Пересадок: 0. С 5 единицами ручной клади это критично." good />
             <Adv icon="🌧" text="Прогноз: ясно, +18°. Лёгкая ветровка." />
-            <Adv text={`До сна Лёвы ${Math.max(0, 134 - total)} мин — ${total < 90 ? "есть запас" : "впритык"}.`} good={total < 90} />
+            <Adv text={`До сна Стеллы ${Math.max(0, 134 - total)} мин — ${total < 90 ? "есть запас" : "впритык"}.`} good={total < 90} />
           </Card>
         </div>
       </div>
